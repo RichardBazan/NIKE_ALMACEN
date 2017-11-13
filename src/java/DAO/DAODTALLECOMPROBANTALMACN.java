@@ -26,4 +26,16 @@ public class DAODTALLECOMPROBANTALMACN {
         }
         return res;
     }
+    
+    public static ResultSet DetallesComprobante(int nrodoc){
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call DetallesComprobante(?)}");
+            cst.setInt(1, nrodoc);
+            rs = cst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }

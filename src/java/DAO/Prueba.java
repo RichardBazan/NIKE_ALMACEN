@@ -5,10 +5,10 @@ public class Prueba {
     public static void main(String[] args) {
   
         //Conexion.getConexion();
-        
-        /*ResultSet rs = null;
+/*       
+        ResultSet rs = null;
         try {
-            rs = DAOPRODUCTO.listarProductos();
+            rs = DAODTALLECOMPROBANTALMACN.DetallesComprobante(123);
             while (rs.next()){
                 System.out.println("----> " + rs.getString(2));
             }
@@ -25,10 +25,9 @@ public class Prueba {
         dto.setEstado(1);
         dto.setTotal(400);
         
-        int res = DAOKBCRACOMPROBANTALMACN.AgregarKbcraComprobantAlmacn(dto);
+        int res = DAOKBCRACOMPROBANTALMACN.EliminarComprobante(456);
         System.out.println(res);
-        
-        */
+       
         
         /*
         DTODTALLECOMPROBANTALMCN DTO = new DTODTALLECOMPROBANTALMCN(1234567,1,30,2);
