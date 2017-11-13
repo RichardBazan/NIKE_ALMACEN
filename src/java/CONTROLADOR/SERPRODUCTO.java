@@ -1,6 +1,7 @@
 package CONTROLADOR;
 
 import DAO.DAOPRODUCTO;
+import DTO.DTOPRODUCTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,16 @@ public class SERPRODUCTO extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
                int op=Integer.parseInt(request.getParameter("opc"));
         DAOPRODUCTO obj=new DAOPRODUCTO();
-        
+           if(op==1){
+    DTOPRODUCTO p=new DTOPRODUCTO();
+    p.setDescripcion(request.getParameter("tdes"));
+    p.setPrecio(Double.parseDouble(request.getParameter("tpre")));
+    p.setTalla(request.getParameter("ttalla"));
+    p.setIdmercado(Integer.parseInt(request.getParameter("tmer")));
+    obj.Adiciona(p);
+    JOptionPane.showMessageDialog(null,"El producto se agregó correctamente");
+    
+   }
     if(op==2){
       int cod=Integer.parseInt(request.getParameter("cod"));
       
@@ -23,6 +33,17 @@ public class SERPRODUCTO extends HttpServlet {
       obj.Eliminar(cod); 
       }
     } 
+    
+       if(op==3){
+    DTOPRODUCTO p=new DTOPRODUCTO();
+    p.setId(Integer.parseInt(request.getParameter("tcod")));
+    p.setDescripcion(request.getParameter("tdes"));
+    p.setPrecio(Double.parseDouble(request.getParameter("tpre")));
+    p.setTalla(request.getParameter("ttalla"));
+    p.setIdmercado(Integer.parseInt(request.getParameter("tmer")));
+    obj.EditarProducto(p);
+        JOptionPane.showMessageDialog(null,"El producto se editó correctamente");
+   }
     
        String pag="/ListaProductos.jsp";
        getServletContext().getRequestDispatcher(pag).forward(request, response);

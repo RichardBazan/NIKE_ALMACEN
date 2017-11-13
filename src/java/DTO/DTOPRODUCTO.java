@@ -5,20 +5,26 @@ public class DTOPRODUCTO {
     
     private int id;
     private String descripcion;
+    private double precio;
+    private double igv;
     private double tafifa;
     private int stock;
     private String talla;
+    private int idmercado;
     private String mercado;
 
     public DTOPRODUCTO() {
     }
 
-    public DTOPRODUCTO(int id, String descripcion, double tafifa, int stock, String talla, String mercado) {
+    public DTOPRODUCTO(int id, String descripcion, double precio, double igv, double tafifa, int stock, String talla, int idmercado, String mercado) {
         this.id = id;
         this.descripcion = descripcion;
+        this.precio = precio;
+        this.igv = igv;
         this.tafifa = tafifa;
         this.stock = stock;
         this.talla = talla;
+        this.idmercado = idmercado;
         this.mercado = mercado;
     }
 
@@ -36,6 +42,22 @@ public class DTOPRODUCTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getIgv() {
+        return igv;
+    }
+
+    public void setIgv(double igv) {
+        this.igv = igv;
     }
 
     public double getTafifa() {
@@ -62,6 +84,14 @@ public class DTOPRODUCTO {
         this.talla = talla;
     }
 
+    public int getIdmercado() {
+        return idmercado;
+    }
+
+    public void setIdmercado(int idmercado) {
+        this.idmercado = idmercado;
+    }
+
     public String getMercado() {
         return mercado;
     }
@@ -69,5 +99,9 @@ public class DTOPRODUCTO {
     public void setMercado(String mercado) {
         this.mercado = mercado;
     }
- 
+
+    
+    
+    
 }
+   

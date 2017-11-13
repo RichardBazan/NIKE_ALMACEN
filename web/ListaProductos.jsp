@@ -9,6 +9,7 @@
     </head>
     <body>
     <center>
+        <a href="Agregarproductos.jsp">Agregar producto</a>
         <h1>LISTA DE PRODUCTOS</h1>
 
         <table border="1">
@@ -20,8 +21,10 @@
             <tr><td><%=p.getDescripcion()%></td><td><%=p.getTafifa()%></td>
                 <td><%=p.getStock()%></td><td><%=p.getTalla()%></td>
                 <td><%=p.getMercado()%></td><td><a href="SERPRODUCTO?opc=2&cod=<%=p.getId()%>">Eliminar</a></td>
-                <td><a href="EditarProducto.jsp?cod=<%=p.getId()%>">Editar</a>   
-      <%}%>
+                <td><a href="Editarproducto.jsp?cod=<%=p.getId()%>&des=<%=p.getDescripcion()%>&pre=<%=p.getPrecio()%>&talla=<%=p.getTalla()%>&idmer=<%=p.getIdmercado()%>&mer=<%=p.getMercado()%>">Editar</a>   
+                                        <%
+    }
+%>  
         </table>
         </center>
     </body>
