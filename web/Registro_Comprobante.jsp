@@ -1,8 +1,10 @@
 
+
 <%@page import="DAO.*,javax.swing.*,java.sql.*" %>
 <html>
        <%
              HttpSession ses = request.getSession();
+             ses.setAttribute("MSJERESULTADOELIMINARCOMPROBANT",null);
              if (ses.getAttribute("MSJERESULTADOGUARDARCOMPROBANT")!=null){
                  String msje = ses.getAttribute("MSJERESULTADOGUARDARCOMPROBANT").toString();
       %>
@@ -198,8 +200,9 @@
               
     <center>
         <h2>REGISTRO COMPROBANTE</h2>
+        <a href="ListaComprobantes.jsp">VER TOTAL REGISTROS</a>
     </center>
-    <form id="form1" method="post" action="SERKBCRACOMPROBANTALMCN">
+    <form id="form1" method="post" action="SERKBCRACOMPROBANTALMCN?opcion=0">
                 <fieldset>
      <legend>Datos del Comprobante</legend>
      <table>
@@ -221,7 +224,7 @@
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Motivo
                       <td>&nbsp;&nbsp;<textarea name="txtmotivo" rows="3" cols="40"></textarea>
                   <tr><td>&nbsp;
-                  <tr><td>Nº Documento<td>  <input type="text" name="txtndocumento" required>
+                  <tr><td>Nº Documento<td><input type="text" name="txtndocumento" required>
                           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Observaciones
                       <td>&nbsp;&nbsp;<textarea name="txtobservaciones" rows="3" cols="40"></textarea>
                           <tr><td>&nbsp;
@@ -288,7 +291,7 @@
             TOTAL: <input name="txttotal" id="txttotal" type="number" value="0" step="0.01" style="width: 6em;">
             <br><br>
                 <center>
-                <input type="submit" value="GUARDAR COMPROBANTE">   
+                    <input type="submit" value="GUARDAR COMPROBANTE">
                 </center>
     </form>
                  </body>

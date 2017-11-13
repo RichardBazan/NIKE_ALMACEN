@@ -28,6 +28,24 @@ public class SERKBCRACOMPROBANTALMCN extends HttpServlet {
         HttpSession ses = request.getSession();
        
         //CABECERA
+        if (Integer.parseInt(request.getParameter("opcion"))==1 || Integer.parseInt(request.getParameter("opcion"))==2){
+        if (Integer.parseInt(request.getParameter("opcion"))==1){
+            String nrodoc = request.getParameter("nrodoc");
+            ses.setAttribute("nrodoc",nrodoc);
+            String pagina = "./ListaComprobantes.jsp";
+            response.sendRedirect(pagina);
+        }else if(Integer.parseInt(request.getParameter("opcion"))==2){
+            int nrodoc = Integer.parseInt(request.getParameter("nrodoc"));
+            int res = DAOKBCRACOMPROBANTALMACN.EliminarComprobante(nrodoc);
+            if (res>0){
+                ses.setAttribute("MSJERESULTADOELIMINARCOMPROBANT","REGISTROS INGRESADOS CORRECTAMENTE.");
+            }
+            else{
+                ses.setAttribute("MSJERESULTADOELIMINARCOMPROBANT","REGISTROS INGRESADOS CORRECTAMENTE.");
+            }
+            response.sendRedirect("./ListaComprobantes.jsp");
+        }
+            } else{
         int res=0;
         int nro_doc = Integer.parseInt(request.getParameter("txtndocumento"));
         String tipo_doc = request.getParameter("txttipodoc");
@@ -70,13 +88,13 @@ public class SERKBCRACOMPROBANTALMCN extends HttpServlet {
         }
         
         if (res==cantFilasProducto+1){
-            ses.setAttribute("MSJERESULTADOGUARDARCOMPROBANT","REGISTROS INGRESADOS CORRECTAMENTE");
+            ses.setAttribute("MSJERESULTADOGUARDARCOMPROBANT","REGISTROS INGRESADOS CORRECTAMENTE.");
         }else{
-            ses.setAttribute("MSJERESULTADOGUARDARCOMPROBANT","OCURRIÓ ALGO, REGISTROS NO INGRESADOS");
+            ses.setAttribute("MSJERESULTADOGUARDARCOMPROBANT","OCURRIÓ ALGO, REGISTROS NO INGRESADOS.");
         }
              
         response.sendRedirect("./Registro_Comprobante.jsp");  
-       
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

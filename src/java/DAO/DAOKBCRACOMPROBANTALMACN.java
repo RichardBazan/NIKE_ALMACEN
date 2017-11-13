@@ -22,4 +22,27 @@ res = cst.executeUpdate();
         }
         return res;
     }
+    
+    public static ResultSet ListarComprobantes(){
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call ListarComprobantes}");
+            rs = cst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
+    public static int EliminarComprobante(int nrodoc){
+        int res=0;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call EliminarComprobante(?)}");
+            cst.setInt(1,nrodoc);
+            res = cst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 }
