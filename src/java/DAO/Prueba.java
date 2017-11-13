@@ -5,10 +5,10 @@ public class Prueba {
     public static void main(String[] args) {
   
         //Conexion.getConexion();
-/*       
+     /*
         ResultSet rs = null;
         try {
-            rs = DAODTALLECOMPROBANTALMACN.DetallesComprobante(123);
+            rs = DAOKBCRACOMPROBANTALMACN.ComprobantesNroDocumento(1);
             while (rs.next()){
                 System.out.println("----> " + rs.getString(2));
             }

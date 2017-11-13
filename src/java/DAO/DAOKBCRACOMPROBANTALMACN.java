@@ -45,4 +45,16 @@ res = cst.executeUpdate();
         }
         return res;
     }
+    
+    public static ResultSet ComprobantesNroDocumento(int nrodoc){
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call ComprobantesNroDocumento(?)}");
+            cst.setInt(1, nrodoc);
+            rs = cst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }

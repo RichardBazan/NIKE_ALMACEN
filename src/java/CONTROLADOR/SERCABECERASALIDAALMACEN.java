@@ -1,30 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CONTROLADOR;
 
-import DTO.*;
-import DAO.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import DAO.*;
+import DTO.*;
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 
-/**
- *
- * @author Jason
- */
-public class SERKBCRACOMPROBANTALMCN extends HttpServlet {
+public class SERCABECERASALIDAALMACEN extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          //SESION
-       
+        
+        //SESION
         HttpSession ses = request.getSession();
        
         //CABECERA
@@ -47,34 +38,23 @@ public class SERKBCRACOMPROBANTALMCN extends HttpServlet {
         }
             } else{
         int res=0;
+        String tipo_doc = request.getParameter("cbtipodocumento");
         int nro_doc = Integer.parseInt(request.getParameter("txtndocumento"));
-        String tipo_doc = request.getParameter("txttipodoc");
-        int codproveedor = Integer.parseInt(request.getParameter("cbproveedor"));
         String fecha = request.getParameter("txtfecha");
-        double igv = Double.parseDouble(request.getParameter("txtigv"));
-        double subtotal = Double.parseDouble(request.getParameter("txtsubtotal"));
-        double total = Double.parseDouble(request.getParameter("txttotal"));
         String motivo = request.getParameter("txtmotivo");
         String observaciones = request.getParameter("txtobservaciones");
-        int estado = Integer.parseInt(request.getParameter("cbestado"));
        
-       //     JOptionPane.showMessageDialog(null,nro_doc+"-"+tipo_doc+"-"+codproveedor+"-"+fecha
-       //     +"-"+motivo+"-"+observaciones+"-"+estado);
+        //JOptionPane.showMessageDialog(null,tipo_doc+"-"+nro_doc+"-"+fecha+"-"+motivo+"-"+observaciones);
             
-        DTOKBCRACOMPROBANTALMACN dtokbcracomprobantalmacn = new DTOKBCRACOMPROBANTALMACN();
-        dtokbcracomprobantalmacn.setNrodoc(nro_doc);
-        dtokbcracomprobantalmacn.setTipodoc(tipo_doc);
-        dtokbcracomprobantalmacn.setCodproveedor(codproveedor);
-        dtokbcracomprobantalmacn.setFecha(fecha);
-        dtokbcracomprobantalmacn.setIgv(igv);
-        dtokbcracomprobantalmacn.setSubtotal(subtotal);
-        dtokbcracomprobantalmacn.setTotal(total);
-        dtokbcracomprobantalmacn.setMotivo(motivo);
-        dtokbcracomprobantalmacn.setObservaciones(observaciones);
-        dtokbcracomprobantalmacn.setEstado(estado);
-        res+=DAOKBCRACOMPROBANTALMACN.AgregarKbcraComprobantAlmacn(dtokbcracomprobantalmacn);
+        DTOCABECERASALIDAALMACEN dtocabeceraalmacen = new DTOCABECERASALIDAALMACEN();
+        dtocabeceraalmacen.setTipodoc(tipo_doc);
+        dtocabeceraalmacen.setNrodoc(nro_doc);
+        dtocabeceraalmacen.setFecha(fecha);
+        dtocabeceraalmacen.setMotivo(motivo);
+        dtocabeceraalmacen.setObservaciones(observaciones);
+        res+= DAOCABECERASALIDAALMACEN.AgregarCabeceraSalidaAlmacen(dtocabeceraalmacen) ;
         
-       
+       /*
         //DETALLE
         
         int cantFilasProducto = Integer.parseInt(request.getParameter("txtnroregistros"));
@@ -94,7 +74,9 @@ public class SERKBCRACOMPROBANTALMCN extends HttpServlet {
         }
              
         response.sendRedirect("./Registro_Comprobante.jsp");  
+        */
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
