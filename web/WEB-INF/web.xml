@@ -8,6 +8,10 @@
         <servlet-name>SERPRODUCTO</servlet-name>
         <servlet-class>CONTROLADOR.SERPRODUCTO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SERCABECERASALIDAALMACEN</servlet-name>
+        <servlet-class>CONTROLADOR.SERCABECERASALIDAALMACEN</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SERKBCRACOMPROBANTALMCN</servlet-name>
         <url-pattern>/SERKBCRACOMPROBANTALMCN</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>SERPRODUCTO</servlet-name>
         <url-pattern>/SERPRODUCTO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SERCABECERASALIDAALMACEN</servlet-name>
+        <url-pattern>/SERCABECERASALIDAALMACEN</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

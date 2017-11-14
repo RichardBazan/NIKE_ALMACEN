@@ -3,6 +3,7 @@
 <%@page import="DAO.*,java.sql.*" %>
 <%!
 int nrodoc;
+ResultSet rs;
 %> 
 <%
     HttpSession ses = request.getSession();
@@ -13,6 +14,18 @@ int nrodoc;
         nrodoc=0;
     }
     ses.setAttribute("nrodoc",null);
+    
+    if (request.getParameter("txtnrodocumento")!=null){
+    int auxnrodoc = Integer.parseInt(request.getParameter("txtnrodocumento"));
+    if (auxnrodoc!=0){
+        rs = DAOKBCRACOMPROBANTALMACN.ComprobantesNroDocumento(auxnrodoc);
+    }else{
+        rs=DAOKBCRACOMPROBANTALMACN.ListarComprobantes();
+    }
+    auxnrodoc=0;
+    }else{
+        rs=DAOKBCRACOMPROBANTALMACN.ListarComprobantes();
+    }
     %>
     
 <html>
@@ -36,12 +49,23 @@ int nrodoc;
     %>
     <center>
         <h2>LISTA DE COMPROBANTES</h2>
+        <a href="Registro_Comprobante.jsp">RETORNAR</a>
         </center>
+    <br>
+    <form method="post" action="#">
+    <fieldset>
+        <legend>Busqueda de comprobantes por nro. de documento</legend>
+        <h4>NRO. DOCUMENTO</h4>&nbsp;<input type="number" id="txtnrodocumento" name="txtnrodocumento" value="0">
+        &nbsp;
+        <input type="submit" value="BUSCAR" name="btnbuscar" id="btnbuscar">
+    </fieldset>
+    </form>
+    <br>
         <form>
             <table border="1">
                 <tr><th>NRO DOC<th>TIPO DOC<th>PROVEEDOR<th>FECHA<th>SUBTOTAL<th>IGV<th>TOTAL<th>MOTIVO<th>OBSERVACIONES<th>ESTADO
                         <%
-                            ResultSet rs = DAOKBCRACOMPROBANTALMACN.ListarComprobantes();
+                            
                             while (rs.next()){
                                 %>
                 <tr><td><%=rs.getString(1)%>
