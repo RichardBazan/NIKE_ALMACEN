@@ -9,6 +9,7 @@
     </head>
     <body>
     <center>
+        <input type="button" value="Menu" onclick="location='MenuAlmacen.jsp'" />
         <a href="Agregarproductos.jsp">Agregar producto</a>
         <h1>LISTA DE PRODUCTOS</h1>
 

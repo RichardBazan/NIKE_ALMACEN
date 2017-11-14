@@ -15,6 +15,7 @@
         <title>Registro de Producto</title>
     </head>
     <body>
+    <center>
         <h1>REGISTRO DE PRODUCTO</h1>
           <form action="SERPRODUCTO" method="post">
             <table>
@@ -56,5 +57,6 @@
                 <tr><td><input type="submit" VALUE="Guardar">        
             </table>
         </form>  
+              </center>
     </body>
 </html>

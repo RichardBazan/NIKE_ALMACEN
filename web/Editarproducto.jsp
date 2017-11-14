@@ -16,7 +16,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Editar Producto</title>
     </head>
+
     <body>
+            <center>
         <%
 String cod=request.getParameter("cod");
 String des=request.getParameter("des");
@@ -68,5 +70,6 @@ String mer=request.getParameter("mer");
                 <tr><td><input type="submit" VALUE="Editar">        
             </table>
         </form>  
+              </center>
     </body>
 </html>
