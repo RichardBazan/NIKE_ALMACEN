@@ -3,14 +3,14 @@
 <html>
        <%
              HttpSession ses = request.getSession();
-             ses.setAttribute("MSJERESULTADOELIMINARCOMPROBANT",null);
-             if (ses.getAttribute("MSJERESULTADOGUARDARCOMPROBANT")!=null){
-                 String msje = ses.getAttribute("MSJERESULTADOGUARDARCOMPROBANT").toString();
+             ses.setAttribute("MSJERESULTADOELIMINARSALIDA",null);
+             if (ses.getAttribute("MSJERESULTADOGUARDARSALIDA")!=null){
+                 String msje = ses.getAttribute("MSJERESULTADOGUARDARSALIDA").toString();
       %>
     
       <body onload="alerta('<%=msje%>')">
       <%
-      ses.setAttribute("MSJERESULTADOGUARDARCOMPROBANT",null);
+      ses.setAttribute("MSJERESULTADOGUARDARSALIDA",null);
              }else{
                  %>
                 <body>
@@ -20,46 +20,11 @@
   
         <%-- JAVASCRIPT --%>
               <script type="text/javascript">
-                  var var1,var2,var3,aux;
-                
+                  
                   function alerta(msje){
                       alert(msje);
                   }
-                  
-                  function DarValorBTxtTipoDoc(){
-                      var1 = document.getElementById("rbtipodocB");
-                      var2 = document.getElementById("rbtipodocGR");
-                      var3 = document.getElementById("rbtipodocF");
-                      aux = document.getElementById("txttipodoc");
-                      if (var1.checked){
-                          var2.checked = false;
-                          var3.checked = false;
-                          aux.value = var1.value.toString();
-                      }
-              }
-              function DarValorGRTxtTipoDoc(){
-                      var2 = document.getElementById("rbtipodocGR");
-                      aux = document.getElementById("txttipodoc");
-                      var1 = document.getElementById("rbtipodocB");
-                      var3 = document.getElementById("rbtipodocF");
-                    if (var2.checked){
-                         var1.checked = false;
-                          var3.checked = false;
-                          aux.value = var2.value.toString();
-                                               }
-              }
-              function DarValorFTxtTipoDoc(){
-                      var3 = document.getElementById("rbtipodocF");
-                      aux = document.getElementById("txttipodoc");
-                      var2 = document.getElementById("rbtipodocGR");
-                      var1 = document.getElementById("rbtipodocB");
-                     if (var3.checked){
-                         var1.checked = false;
-                         var2.checked = false;
-                          aux.value = var3.value.toString();                          
-                      }
-              }
-                            
+                                                              
               function contarFilasTablaProductos(){
                   var tabla = document.getElementById("tablaProductos");
                   var txtnumregistros = document.getElementById("txtnroregistros");
@@ -74,7 +39,6 @@
               var columna2 = fila.insertCell(1);
               var columna3 = fila.insertCell(2);
               var columna4 = fila.insertCell(3);
-              var columna5 = fila.insertCell(4);
               
               var cbdescripcion = document.getElementById("cbproductos"); 
               var productoselect = cbdescripcion.options[cbdescripcion.selectedIndex].text;
@@ -95,18 +59,7 @@
               txtdescripcion.setAttribute("size","52");
               txtdescripcion.setAttribute("value",productoselect);
               txtdescripcion.readOnly=true;
-            
-              var txttarifa = document.createElement("INPUT");
-              txttarifa.setAttribute("type","number");
-              txttarifa.setAttribute("step","0.01");
-              txttarifa.setAttribute("name","txttarifa"+aux.toString());
-              txttarifa.setAttribute("id","txttarifa"+aux.toString());
-              txttarifa.setAttribute("style","width: 6em;");
-              txttarifa.value = 0;
-              //txttarifa.addEventListener('mousemove',calcularTotal(),false);
-              //txttarifa.setAttribute("onblur",calcularTotal());
-              //txttarifa.onblur = calcularTotal();
-              
+                                     
               var txtcantidad = document.createElement("INPUT");
               txtcantidad.setAttribute("type","number");
               txtcantidad.setAttribute("name","txtcantidad"+aux.toString());
@@ -127,9 +80,8 @@
               
               columna1.appendChild(txtcodigo);
               columna2.appendChild(txtdescripcion);
-              columna3.appendChild(txttarifa);
-              columna4.appendChild(txtcantidad);
-              columna5.appendChild(btneliminar);
+              columna3.appendChild(txtcantidad);
+              columna4.appendChild(btneliminar);
               contarFilasTablaProductos();
              
               }
@@ -145,7 +97,6 @@
                       var btnaux = document.getElementById("btneliminar"+(indice+i).toString());
                       var txtcodigo = document.getElementById("txtcodigo"+(indice+i).toString());
                       var txtdescripcion = document.getElementById("txtdescripcion"+(indice+i).toString());
-                      var txttarifa = document.getElementById("txttarifa"+(indice+i).toString());
                       var txtcantidad = document.getElementById("txtcantidad"+(indice+i).toString());
                       
                       btnaux.setAttribute("onclick","eliminarFilaTablaProductos(" + (indice+i-1).toString() + ")");
@@ -157,49 +108,21 @@
                       
                       txtdescripcion.setAttribute("name","txtdescripcion"+(indice+i-1).toString());
                       txtdescripcion.setAttribute("id","txtdescripcion"+(indice+i-1).toString());
-                      
-                      txttarifa.setAttribute("name","txttarifa"+(indice+i-1).toString());
-                      txttarifa.setAttribute("id","txttarifa"+(indice+i-1).toString());
-                      
+                                                                
                       txtcantidad.setAttribute("name","txtcantidad"+(indice+i-1).toString());
                       txtcantidad.setAttribute("id","txtcantidad"+(indice+i-1).toString());
                   }
                   }
                   contarFilasTablaProductos();
-                  
-                  if(parseInt(txttotal.value)>0){
-                      calcularTotal();
-                  }
               }
-              
-              function calcularTotal(){
-                  var txttotal = document.getElementById("txttotal");
-                  var txtsubtotal = document.getElementById("txtsubtotal");
-                  var txtigv = document.getElementById("txtigv");
-                  var tabla = document.getElementById("tablaProductos");
-                  var ia;
-                  var igv=0;
-                  var total=0;
-                  for (ia=1;ia<tabla.rows.length;ia++){
-                   var txttarifa = document.getElementById("txttarifa"+ia.toString());
-                   var txtcantidad = document.getElementById("txtcantidad"+ia.toString());
-                   if (txtcantidad!=null && txttarifa!=null){
-                   total += parseFloat(txttarifa.value) * parseInt(txtcantidad.value);
-               }
-                  }
-                  igv = (total*0.18);
-                  txttotal.value = total;
-                  txtigv.value = parseFloat(igv).toFixed(2);
-                  txtsubtotal.value = (total - parseFloat(igv)).toFixed(2);
-              }
-              
               </script>      
               
               <%-- JAVASCRIPT --%>
               
     <center>
         <h2>REGISTRO SALIDA ALMACÉN</h2>
-        <a href="ListaSalidas.jsp">VER TOTAL REGISTROS</a>
+        <a href="ListaSalidas.jsp">VER TOTAL REGISTROS</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="MenuAlmacen.jsp">VOLVER AL MENU</a>
     </center>
     <form id="form1" method="post" action="SERCABECERASALIDAALMACEN?opcion=0">
                 <fieldset>
@@ -256,7 +179,7 @@
         <br>
         <br>
             <table border="1" id="tablaProductos" >
-                <tr><th>CODIGO<th>DESCRIPCION<th>TARIFA<th>CANTIDAD  
+                <tr><th>CODIGO<th>DESCRIPCION<th>CANTIDAD  
             </table>
         <h5>NRO REGISTROS: <input type="text" size="3" id="txtnroregistros" name="txtnroregistros" value="0" readonly><br><br>
                 <center>

@@ -54,7 +54,7 @@ ResultSet rs;
     <br>
     <form method="post" action="#">
     <fieldset>
-        <legend>Busqueda de comprobantes por nro. de documento</legend>
+        <legend>Busqueda de comprobante por nro. de documento</legend>
         <h4>NRO. DOCUMENTO</h4>&nbsp;<input type="number" id="txtnrodocumento" name="txtnrodocumento" value="0">
         &nbsp;
         <input type="submit" value="BUSCAR" name="btnbuscar" id="btnbuscar">

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAO.*;
 import DTO.*;
+import java.sql.ResultSet;
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
 
@@ -21,20 +22,20 @@ public class SERCABECERASALIDAALMACEN extends HttpServlet {
         //CABECERA
         if (Integer.parseInt(request.getParameter("opcion"))==1 || Integer.parseInt(request.getParameter("opcion"))==2){
         if (Integer.parseInt(request.getParameter("opcion"))==1){
-            String nrodoc = request.getParameter("nrodoc");
-            ses.setAttribute("nrodoc",nrodoc);
-            String pagina = "./ListaComprobantes.jsp";
+            String codsalida = request.getParameter("codsalida");
+            ses.setAttribute("codsalida",codsalida);
+            String pagina = "./ListaSalidas.jsp";
             response.sendRedirect(pagina);
         }else if(Integer.parseInt(request.getParameter("opcion"))==2){
-            int nrodoc = Integer.parseInt(request.getParameter("nrodoc"));
-            int res = DAOKBCRACOMPROBANTALMACN.EliminarComprobante(nrodoc);
+            int codsalida = Integer.parseInt(request.getParameter("codsalida"));
+            int res = DAOCABECERASALIDAALMACEN.EliminarSalida(codsalida);
             if (res>0){
-                ses.setAttribute("MSJERESULTADOELIMINARCOMPROBANT","REGISTROS ELIMINADOS CORRECTAMENTE.");
+                ses.setAttribute("MSJERESULTADOELIMINARSALIDA","REGISTROS ELIMINADOS CORRECTAMENTE.");
             }
             else{
-                ses.setAttribute("MSJERESULTADOELIMINARCOMPROBANT","OCURRIÓ ALGO, REGISTROS NO ELIMINADOS.");
+                ses.setAttribute("MSJERESULTADOELIMINARSALIDA","OCURRIÓ ALGO, REGISTROS NO ELIMINADOS.");
             }
-            response.sendRedirect("./ListaComprobantes.jsp");
+            response.sendRedirect("./ListaSalidas.jsp");
         }
             } else{
         int res=0;
@@ -54,27 +55,36 @@ public class SERCABECERASALIDAALMACEN extends HttpServlet {
         dtocabeceraalmacen.setObservaciones(observaciones);
         res+= DAOCABECERASALIDAALMACEN.AgregarCabeceraSalidaAlmacen(dtocabeceraalmacen) ;
         
-       /*
+      
         //DETALLE
         
         int cantFilasProducto = Integer.parseInt(request.getParameter("txtnroregistros"));
         
+        int cod_salida = 0;
+            try {
+                ResultSet rs = DAOCABECERASALIDAALMACEN.CodigoSalidaAutogenerado();
+                if (rs.next()){
+                 cod_salida= rs.getInt(1);
+                }
+            } catch (Exception e) {
+            }
+        
+        
         for (int i=1;i<=cantFilasProducto;i++){
         int codprod = Integer.parseInt(request.getParameter("txtcodigo"+String.valueOf(i)));
-        double tarifa = Double.parseDouble(request.getParameter("txttarifa"+String.valueOf(i)));
         int cantidad = Integer.parseInt(request.getParameter("txtcantidad"+String.valueOf(i)));
-        DTODTALLECOMPROBANTALMCN dtodtallecomprobantalmacn = new DTODTALLECOMPROBANTALMCN(nro_doc,codprod, tarifa, cantidad);
-        res+=DAODTALLECOMPROBANTALMACN.agregarDtalleComprobantAlmacn(dtodtallecomprobantalmacn);
+        DTODETALLESALIDAALMACEN dtodetallesalidaalmacen = new DTODETALLESALIDAALMACEN(cod_salida, codprod, cantidad);
+        res+=DAODETALLESALIDAALMACEN.AgregarDetalleSalidaAlmacen(dtodetallesalidaalmacen);
         }
         
         if (res==cantFilasProducto+1){
-            ses.setAttribute("MSJERESULTADOGUARDARCOMPROBANT","REGISTROS INGRESADOS CORRECTAMENTE.");
+            ses.setAttribute("MSJERESULTADOGUARDARSALIDA","REGISTROS INGRESADOS CORRECTAMENTE.");
         }else{
-            ses.setAttribute("MSJERESULTADOGUARDARCOMPROBANT","OCURRIÓ ALGO, REGISTROS NO INGRESADOS.");
+            ses.setAttribute("MSJERESULTADOGUARDARSALIDA","OCURRIÓ ALGO, REGISTROS NO INGRESADOS.");
         }
              
-        response.sendRedirect("./Registro_Comprobante.jsp");  
-        */
+        response.sendRedirect("./Registro_Salida.jsp");  
+      
         }
         
     }

@@ -200,7 +200,9 @@
               
     <center>
         <h2>REGISTRO COMPROBANTE</h2>
-        <a href="ListaComprobantes.jsp">VER TOTAL REGISTROS</a>
+        <a href="ListaComprobantes.jsp">VER TOTAL REGISTROS</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="MenuAlmacen.jsp">VOLVER AL MENU</a>
+
     </center>
     <form id="form1" method="post" action="SERKBCRACOMPROBANTALMCN?opcion=0">
                 <fieldset>

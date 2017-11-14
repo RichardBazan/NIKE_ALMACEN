@@ -16,4 +16,49 @@ res = cst.executeUpdate();
         }
         return res;
     }
+    
+    public static ResultSet CodigoSalidaAutogenerado(){
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call CodigoSalidaAutogenerado}");
+            rs = cst.executeQuery();
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    public static ResultSet ListarSalidas(){
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call ListaSalidas}");
+            rs = cst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
+    public static int EliminarSalida(int codsalida){
+        int res=0;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call EliminarSalida(?)}");
+            cst.setInt(1,codsalida);
+            res = cst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
+    public static ResultSet SalidaCodSalida(int codsalida){
+        ResultSet rs = null;
+        try {
+            CallableStatement cst = Conexion.getConexion().prepareCall("{call SalidaCodSalida(?)}");
+            cst.setInt(1, codsalida);
+            rs = cst.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }

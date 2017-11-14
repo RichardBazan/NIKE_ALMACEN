@@ -5,35 +5,26 @@ public class Prueba {
     public static void main(String[] args) {
   
         //Conexion.getConexion();
-     /*
+    /*
         ResultSet rs = null;
         try {
-            rs = DAOKBCRACOMPROBANTALMACN.ComprobantesNroDocumento(1);
+            rs = DAOCABECERASALIDAALMACEN.CodigoSalidaAutogenerado();
             while (rs.next()){
-                System.out.println("----> " + rs.getString(2));
+                System.out.println("----> " + rs.getString(1));
             }
         } catch (Exception e) {
         }
-  /*
-        DTOKBCRACOMPROBANTALMACN dto = new DTOKBCRACOMPROBANTALMACN();
-        dto.setNrodoc(12345);
-        dto.setTipodoc("B");
-        dto.setCodproveedor(1);
-        dto.setFecha("2017-11-03");
-        dto.setMotivo("jajaja");
-        dto.setObservaciones("jejeje");
-        dto.setEstado(1);
-        dto.setTotal(400);
-        
-        int res = DAOKBCRACOMPROBANTALMACN.EliminarComprobante(456);
-        System.out.println(res);
+  */
+        DTODETALLESALIDAALMACEN dto = new DTODETALLESALIDAALMACEN(1,1,1000);
+        int res = DAODETALLESALIDAALMACEN.AgregarDetalleSalidaAlmacen(dto);
        
         
         /*
         DTODTALLECOMPROBANTALMCN DTO = new DTODTALLECOMPROBANTALMCN(1234567,1,30,2);
         int res = DAODTALLECOMPROBANTALMACN.agregarDtalleComprobantAlmacn(DTO);
-        System.out.println(res);
                 */
+        System.out.println(res);
+                
     }
     
 }
